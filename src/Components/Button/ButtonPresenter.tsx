@@ -6,7 +6,8 @@ import { Element } from "../Input";
 const Button = styled(Element)`
   background-color: transparent;
   color: black;
-  width: 20%;
+  width: 100%;
+  max-width: 280px;
   cursor: pointer;
 `;
 

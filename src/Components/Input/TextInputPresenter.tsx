@@ -9,7 +9,8 @@ export const Element = styled.input`
   -ms-progress-appearance: none;
   border: 3px solid black;
   padding: 15px;
-  width: 40%;
+  width: 100%;
+  max-width: 400px;
   display: block;
   margin-bottom: 25px;
   &::-webkit-input-placeholder {

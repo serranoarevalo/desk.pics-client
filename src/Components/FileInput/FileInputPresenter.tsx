@@ -7,6 +7,7 @@ interface IContainer {
 
 const Container = styled<IContainer, any>("div")`
   color: ${props => (props.hasFile ? "black" : "rgba(0, 0, 0, 0.5);")};
+  min-width: 40%;
 `;
 
 const Label = styled.label`
@@ -16,7 +17,8 @@ const Label = styled.label`
   -ms-progress-appearance: none;
   border: 3px solid black;
   padding: 15px;
-  width: 40%;
+  width: 100%;
+  max-width: 400px;
   display: block;
   margin-bottom: 9px;
   background-color: white;
