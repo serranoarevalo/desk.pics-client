@@ -23,12 +23,12 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
   onFormSubmit,
   uploading,
   hasFile,
-  isLoggedIn,
+  screenState,
   fbCallback,
   loggedOutText
 }) => (
   <Page>
-    {isLoggedIn ? (
+    {screenState === "loggedIn" ? (
       <form onSubmit={onFormSubmit}>
         <FileInput onChange={onInputChange} hasFile={hasFile} />
         <Input
@@ -49,7 +49,7 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
         />
         <Button value={uploading ? "Uploading desk pic" : "Add Image"} />
       </form>
-    ) : (
+    ) : screenState === "loggedOut" ? (
       <React.Fragment>
         {loggedOutText}
         <FacebookLogin
@@ -60,6 +60,8 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
           render={FacebookLoginComponent}
         />
       </React.Fragment>
+    ) : (
+      "Your desk pic was uploaded. Thanks."
     )}
   </Page>
 );
@@ -71,7 +73,7 @@ AddPresenter.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
   uploading: PropTypes.bool.isRequired,
   hasFile: PropTypes.bool.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  screenState: PropTypes.string.isRequired
 };
 
 export default AddPresenter;

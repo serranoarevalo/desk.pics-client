@@ -6,11 +6,13 @@ interface IFormState {
   locationName: string;
 }
 
+type screenState = "loggedOut" | "loggedIn" | "uploaded";
+
 export interface IContainerState extends IFormState {
   uploading: boolean;
   hasFile: boolean;
   file?: Blob;
-  isLoggedIn: boolean;
+  screenState: screenState;
   loggedOutText: string;
 }
 

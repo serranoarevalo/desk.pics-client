@@ -5,9 +5,10 @@ import React, {
   FormEvent,
   FormEventHandler
 } from "react";
-import { compose, graphql } from "react-apollo";
+import { compose, graphql, MutationUpdaterFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
+import { GET_DESK_PICS } from "../Home/HomeQueries";
 import AddPresenter from "./AddPresenter";
 import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";
@@ -26,7 +27,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       locationName: "",
       uploading: false,
       hasFile: false,
-      isLoggedIn: false,
+      screenState: "loggedOut",
       loggedOutText: "First:\n"
     };
   }
@@ -82,7 +83,13 @@ class AddContainer extends React.Component<IProps, IContainerState> {
           drinkName,
           photoUrl: secure_url,
           locationName
-        }
+        },
+        context: {
+          headers: {
+            "X-JWT": localStorage.getItem("jwt")
+          }
+        },
+        update: this.postUpload
       });
     }
   };
@@ -99,9 +106,9 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       }
     });
     if (data.ConnectUser.ok && data.ConnectUser.token) {
-      localStorage.setItem("jwt", data.token);
+      localStorage.setItem("jwt", data.ConnectUser.token);
       this.setState({
-        isLoggedIn: true
+        screenState: "loggedIn"
       });
     } else if (!data.ok) {
       this.setState({
@@ -109,11 +116,23 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       });
     }
   };
+
+  private postUpload: MutationUpdaterFn = (cache, { data }: { data: any }) => {
+    const { UploadDeskPic } = data;
+    if (UploadDeskPic.ok) {
+      this.setState({
+        screenState: "uploaded"
+      });
+    }
+  };
 }
 
 export default compose(
   graphql(UPLOAD_DESK_PIC, {
-    name: "UploadDeskPic"
+    name: "UploadDeskPic",
+    options: {
+      refetchQueries: [{ query: GET_DESK_PICS, variables: { page: 0 } }]
+    }
   }),
   graphql(CONNECT_USER, {
     name: "ConnectUser"
