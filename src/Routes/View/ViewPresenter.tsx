@@ -1,16 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import InfoItem from "../../Components/InfoItem";
-
-const Container = styled.div`
-  padding-top: 100px;
-  width: 100%;
-`;
-
-const SLink = styled(Link)`
-  font-size: 36px;
-`;
+import Page from "../../Components/Page";
 
 const View = styled.div`
   margin-top: 80px;
@@ -28,8 +19,7 @@ const InfoBox = styled.div`
 `;
 
 const ViewPresenter = () => (
-  <Container>
-    <SLink to={"/"}>←</SLink>
+  <Page>
     <View>
       <Image
         src={
@@ -42,7 +32,7 @@ const ViewPresenter = () => (
         <InfoItem item={"Flynn"} />
       </InfoBox>
     </View>
-  </Container>
+  </Page>
 );
 
 export default ViewPresenter;
