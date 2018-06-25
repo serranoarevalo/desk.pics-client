@@ -9,7 +9,7 @@ const Card = styled.div`
   height: 100%;
   width: 100%;
   padding: 10px;
-  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
   font-size: 14px;
   opacity: 0;
   font-style: italic;

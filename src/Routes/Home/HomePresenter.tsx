@@ -13,7 +13,7 @@ const Title = styled.h1`
 `;
 
 const Images = styled.div`
-  margin-top: 130px;
+  margin-top: 80px;
   display: grid;
   grid-gap: 35px;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -24,7 +24,7 @@ const Images = styled.div`
 
 const HomePresenter = () => (
   <Container>
-    <Title>deks pics</Title>
+    <Title>desk pics</Title>
     <Images>
       <Image
         name={"Flynn"}
