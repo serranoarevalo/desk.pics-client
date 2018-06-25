@@ -44,6 +44,7 @@ const ViewPresenter: React.SFC<IProps> = ({
           </InfoBox>
         </View>
       )}
+    {!loading && !error && GetDeskPic.error && GetDeskPic.error}
   </Page>
 );
 
