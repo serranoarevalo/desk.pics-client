@@ -1,9 +1,11 @@
 import React from "react";
+import { Route } from "react-router-dom";
+import Home from "../../Routes/Home";
 
-class App extends React.Component {
-  public render() {
-    return <div className="App" />;
-  }
-}
+const AppPresenter = () => (
+  <React.Fragment>
+    <Route exact={true} path={"/"} component={Home} />
+  </React.Fragment>
+);
 
-export default App;
+export default AppPresenter;
