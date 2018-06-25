@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, {
   ChangeEvent,
   ChangeEventHandler,
@@ -5,6 +6,7 @@ import React, {
   FormEventHandler
 } from "react";
 import { RouteProps } from "react-router";
+import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
 import AddPresenter from "./AddPresenter";
 import { IContainerState } from "./AddTypes";
 
@@ -36,7 +38,8 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
     } = event;
     if (files) {
       this.setState({
-        hasFile: true
+        hasFile: true,
+        file: files[0]
       });
     }
     this.setState({
@@ -44,14 +47,26 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
     } as any);
   };
 
-  private handleFormSubmit: FormEventHandler = (event: FormEvent) => {
+  private handleFormSubmit: FormEventHandler = async (event: FormEvent) => {
     event.preventDefault();
-    const { drinkName, locationName } = this.state;
-    if (locationName && drinkName) {
-      // TO DO: Axios Sign URL
+    const { drinkName, locationName, file } = this.state;
+    if (locationName && drinkName && file) {
       this.setState({
         uploading: true
       });
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("api_key", CLOUDINARY_KEY);
+      formData.append("timestamp", String(Date.now() / 1000));
+      formData.append("upload_preset", CLOUDINARY_PRESET);
+      const {
+        data: { secure_url }
+      } = await axios.post(
+        "https://api.cloudinary.com/v1_1/djjpx4ror/image/upload",
+        formData
+      );
+      this.setState({ photoUrl: secure_url });
+      // To Do Mutation
     }
   };
 }
