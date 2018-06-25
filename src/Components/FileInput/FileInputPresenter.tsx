@@ -8,6 +8,7 @@ interface IContainer {
 const Container = styled<IContainer, any>("div")`
   color: ${props => (props.hasFile ? "black" : "rgba(0, 0, 0, 0.5);")};
   min-width: 40%;
+  cursor: pointer;
 `;
 
 const Label = styled.label`

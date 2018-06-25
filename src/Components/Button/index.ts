@@ -1,2 +1,3 @@
-import ButtonPresenter from "./ButtonPresenter";
+import ButtonPresenter, { ButtonElement } from "./ButtonPresenter";
+export { ButtonElement };
 export default ButtonPresenter;

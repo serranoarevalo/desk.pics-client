@@ -27,3 +27,22 @@ export const UPLOAD_DESK_PIC = gql`
     }
   }
 `;
+
+export const CONNECT_USER = gql`
+  mutation ConnectUser(
+    $email: String
+    $firstName: String!
+    $lastName: String!
+    $fbUserId: String!
+  ) {
+    ConnectUser(
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      fbUserId: $fbUserId
+    ) {
+      ok
+      token
+    }
+  }
+`;

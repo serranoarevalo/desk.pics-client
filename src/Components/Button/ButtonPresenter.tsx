@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Element } from "../Input";
 
-const Button = styled(Element)`
+export const ButtonElement = styled(Element)`
   background-color: transparent;
   color: black;
   width: 100%;
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const ButtonPresenter: React.SFC<IProps> = ({ value }) => (
-  <Button type="submit" value={value} />
+  <ButtonElement type="submit" value={value} />
 );
 
 ButtonPresenter.propTypes = {

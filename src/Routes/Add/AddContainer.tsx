@@ -5,15 +5,16 @@ import React, {
   FormEvent,
   FormEventHandler
 } from "react";
-import { graphql } from "react-apollo";
+import { compose, graphql } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
 import AddPresenter from "./AddPresenter";
-import { UPLOAD_DESK_PIC } from "./AddQueries";
+import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";
 
 interface IProps extends RouteComponentProps<any> {
   UploadDeskPic: any;
+  ConnectUser: any;
 }
 
 class AddContainer extends React.Component<IProps, IContainerState> {
@@ -24,9 +25,10 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       photoUrl: "",
       locationName: "",
       uploading: false,
-      hasFile: false
+      hasFile: false,
+      isLoggedIn: false,
+      loggedOutText: "First:\n"
     };
-    console.log(props);
   }
   render() {
     return (
@@ -34,6 +36,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
         {...this.state}
         onInputChange={this.handleInputChage}
         onFormSubmit={this.handleFormSubmit}
+        fbCallback={this.handleFacebookResponse}
       />
     );
   }
@@ -83,8 +86,36 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       });
     }
   };
+
+  private handleFacebookResponse = async (response: any) => {
+    const { ConnectUser } = this.props;
+    const { email, first_name, last_name, userID } = response;
+    const { data }: any = await ConnectUser({
+      variables: {
+        email,
+        firstName: first_name,
+        lastName: last_name,
+        fbUserId: userID
+      }
+    });
+    if (data.ConnectUser.ok && data.ConnectUser.token) {
+      localStorage.setItem("jwt", data.token);
+      this.setState({
+        isLoggedIn: true
+      });
+    } else if (!data.ok) {
+      this.setState({
+        loggedOutText: "Can't log in."
+      });
+    }
+  };
 }
 
-export default graphql<any, any>(UPLOAD_DESK_PIC, {
-  name: "UploadDeskPic"
-})(AddContainer);
+export default compose(
+  graphql(UPLOAD_DESK_PIC, {
+    name: "UploadDeskPic"
+  }),
+  graphql(CONNECT_USER, {
+    name: "ConnectUser"
+  })
+)(AddContainer);
