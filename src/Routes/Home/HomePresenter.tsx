@@ -1,3 +1,5 @@
+import { ApolloError } from "apollo-boost";
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import Image from "../../Components/Image";
@@ -22,20 +24,36 @@ const Images = styled.div`
   overflow: hidden;
 `;
 
-const HomePresenter = () => (
+interface IProps {
+  loading: boolean;
+  error: ApolloError | undefined;
+  data: any;
+}
+
+const HomePresenter: React.SFC<IProps> = ({ loading, error, data }) => (
   <Container>
     <Title>desk pics</Title>
     <Images>
-      <Image
-        name={"Flynn"}
-        drink={"Americano"}
-        location={"Seoul/S. Korea"}
-        imageUrl={
-          "https://images.unsplash.com/photo-1529867094037-62cb612ab829?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fd4d638283a0871756df58ddfb7c8721&auto=format&fit=crop&w=2250&q=80"
-        }
-      />
+      {!loading &&
+        !error &&
+        data &&
+        data.GetDeskPics.deskPics.map(pic => (
+          <Image
+            key={pic.id}
+            name={pic.user.firstName}
+            drink={pic.drink.name}
+            location={pic.locationName}
+            imageUrl={pic.photoUrl}
+          />
+        ))}
     </Images>
   </Container>
 );
+
+HomePresenter.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.object,
+  data: PropTypes.object
+};
 
 export default HomePresenter;
