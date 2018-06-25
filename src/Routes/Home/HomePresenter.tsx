@@ -8,6 +8,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 36px;
+  font-weight: 600;
 `;
 
 const Images = styled.div`
@@ -25,13 +26,26 @@ const Image = styled.div`
   padding-bottom: 100%;
   background-size: cover;
   background-position: center center;
+  position: relative;
+`;
+
+const Card = styled.div`
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 14px;
 `;
 
 const HomePresenter = () => (
   <Container>
     <Title>deks pics</Title>
     <Images>
-      <Image />
+      <Image>
+        <Card>Capuccino</Card>
+      </Image>
       <Image />
       <Image />
       <Image />
