@@ -4,7 +4,6 @@ import InfoItem from "../../Components/InfoItem";
 import Page from "../../Components/Page";
 
 const View = styled.div`
-  margin-top: 80px;
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-gap: 50px;

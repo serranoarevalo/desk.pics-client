@@ -1,10 +1,48 @@
-import React from "react";
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  FormEvent,
+  FormEventHandler
+} from "react";
+import { RouteProps } from "react-router";
 import AddPresenter from "./AddPresenter";
+import { IContainerState } from "./AddTypes";
 
-class AddContainer extends React.Component {
-  render() {
-    return <AddPresenter />;
+class AddContainer extends React.Component<RouteProps, IContainerState> {
+  constructor(props: RouteProps) {
+    super(props);
+    this.state = {
+      drinkName: "",
+      photoUrl: "",
+      locationName: "",
+      uploading: false
+    };
   }
+  render() {
+    return (
+      <AddPresenter
+        {...this.state}
+        onInputChange={this.handleInputChage}
+        onFormSubmit={this.handleFormSubmit}
+      />
+    );
+  }
+  private handleInputChage: ChangeEventHandler<HTMLInputElement> = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const {
+      target: { name, value }
+    } = event;
+    this.setState({
+      [name]: value
+    } as any);
+  };
+
+  private handleFormSubmit: FormEventHandler = (event: FormEvent) => {
+    event.preventDefault();
+    const { drinkName, locationName } = this.state;
+    console.log(drinkName, locationName);
+  };
 }
 
 export default AddContainer;
