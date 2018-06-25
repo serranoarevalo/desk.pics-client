@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import InfoItem from "../InfoItem";
 
 const Card = styled.div`
   background-color: white;
@@ -9,10 +10,7 @@ const Card = styled.div`
   height: 100%;
   width: 100%;
   padding: 10px;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 14px;
   opacity: 0;
-  font-style: italic;
 `;
 
 interface ImageInterface {
@@ -28,11 +26,6 @@ const Image = styled<ImageInterface, any>("div")`
   &:hover ${Card} {
     opacity: 1;
   }
-`;
-
-const Item = styled.span`
-  display: block;
-  margin-bottom: 10px;
 `;
 
 interface IProps {
@@ -51,9 +44,9 @@ const ImagePresenter: React.SFC<IProps> = ({
   <Link to={"/view/1"}>
     <Image imageUrl={imageUrl}>
       <Card>
-        <Item>{drink}</Item>
-        <Item>{location}</Item>
-        <Item>{name}</Item>
+        <InfoItem item={drink} />
+        <InfoItem item={location} />
+        <InfoItem item={name} />
       </Card>
     </Image>
   </Link>
