@@ -5,13 +5,19 @@ import React, {
   FormEvent,
   FormEventHandler
 } from "react";
-import { RouteProps } from "react-router";
+import { graphql } from "react-apollo";
+import { RouteComponentProps } from "react-router";
 import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
 import AddPresenter from "./AddPresenter";
+import { UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";
 
-class AddContainer extends React.Component<RouteProps, IContainerState> {
-  constructor(props: RouteProps) {
+interface IProps extends RouteComponentProps<any> {
+  UploadDeskPic: any;
+}
+
+class AddContainer extends React.Component<IProps, IContainerState> {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       drinkName: "",
@@ -20,6 +26,7 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
       uploading: false,
       hasFile: false
     };
+    console.log(props);
   }
   render() {
     return (
@@ -48,6 +55,7 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
   };
 
   private handleFormSubmit: FormEventHandler = async (event: FormEvent) => {
+    const { UploadDeskPic } = this.props;
     event.preventDefault();
     const { drinkName, locationName, file } = this.state;
     if (locationName && drinkName && file) {
@@ -66,9 +74,17 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
         formData
       );
       this.setState({ photoUrl: secure_url });
-      // To Do Mutation
+      UploadDeskPic({
+        variables: {
+          drinkName,
+          photoUrl: secure_url,
+          locationName
+        }
+      });
     }
   };
 }
 
-export default AddContainer;
+export default graphql<any, any>(UPLOAD_DESK_PIC, {
+  name: "UploadDeskPic"
+})(AddContainer);

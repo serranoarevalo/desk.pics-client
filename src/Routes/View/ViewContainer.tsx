@@ -4,8 +4,12 @@ import { RouteComponentProps } from "react-router";
 import ViewPresenter from "./ViewPresenter";
 import { GET_DESK_PIC } from "./ViewQueries";
 
-class ViewContainer extends React.Component<RouteComponentProps<any>> {
-  constructor(props: RouteComponentProps<any>) {
+interface IRouteProps {
+  id: number;
+}
+
+class ViewContainer extends React.Component<RouteComponentProps<IRouteProps>> {
+  constructor(props: RouteComponentProps<IRouteProps>) {
     super(props);
   }
   render() {
@@ -14,7 +18,6 @@ class ViewContainer extends React.Component<RouteComponentProps<any>> {
         params: { id }
       }
     } = this.props;
-    console.log(id);
     return (
       <Query query={GET_DESK_PIC} variables={{ id }}>
         {({ loading, data, error }) => (
