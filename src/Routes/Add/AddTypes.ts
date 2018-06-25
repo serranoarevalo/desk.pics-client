@@ -4,6 +4,7 @@ interface IFormState {
   drinkName: string;
   photoUrl: string;
   locationName: string;
+  hasFile: boolean;
 }
 
 export interface IContainerState extends IFormState {

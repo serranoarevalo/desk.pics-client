@@ -15,7 +15,8 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
       drinkName: "",
       photoUrl: "",
       locationName: "",
-      uploading: false
+      uploading: false,
+      hasFile: false
     };
   }
   render() {
@@ -31,8 +32,13 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
     event: ChangeEvent<HTMLInputElement>
   ) => {
     const {
-      target: { name, value }
+      target: { name, value, files }
     } = event;
+    if (files) {
+      this.setState({
+        hasFile: true
+      });
+    }
     this.setState({
       [name]: value
     } as any);
@@ -41,7 +47,12 @@ class AddContainer extends React.Component<RouteProps, IContainerState> {
   private handleFormSubmit: FormEventHandler = (event: FormEvent) => {
     event.preventDefault();
     const { drinkName, locationName } = this.state;
-    console.log(drinkName, locationName);
+    if (locationName && drinkName) {
+      // TO DO: Axios Sign URL
+      this.setState({
+        uploading: true
+      });
+    }
   };
 }
 
