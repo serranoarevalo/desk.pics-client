@@ -33,15 +33,17 @@ interface IProps {
   drink: string;
   location: string;
   name: string;
+  id: number;
 }
 
 const ImagePresenter: React.SFC<IProps> = ({
+  id,
   drink,
   imageUrl,
   location,
   name
 }) => (
-  <Link to={"/view/1"}>
+  <Link to={`/view/${id}`}>
     <Image imageUrl={imageUrl}>
       <Card>
         <InfoItem item={drink} />
@@ -56,7 +58,8 @@ ImagePresenter.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   drink: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired
 };
 
 export default ImagePresenter;

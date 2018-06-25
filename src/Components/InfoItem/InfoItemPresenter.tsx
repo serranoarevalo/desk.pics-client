@@ -8,6 +8,7 @@ const Item = styled.span`
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
   font-size: 14px;
+  text-transform: capitalize;
 `;
 
 interface IProps {

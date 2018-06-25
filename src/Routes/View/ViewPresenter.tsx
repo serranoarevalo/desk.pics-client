@@ -1,3 +1,5 @@
+import { ApolloError } from "apollo-boost";
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import InfoItem from "../../Components/InfoItem";
@@ -17,21 +19,38 @@ const InfoBox = styled.div`
   align-self: end;
 `;
 
-const ViewPresenter = () => (
+interface IProps {
+  data: any;
+  loading: boolean;
+  error: ApolloError | undefined;
+}
+
+const ViewPresenter: React.SFC<IProps> = ({
+  data: { GetDeskPic = null },
+  loading,
+  error
+}) => (
   <Page>
-    <View>
-      <Image
-        src={
-          "https://images.unsplash.com/photo-1529867094037-62cb612ab829?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fd4d638283a0871756df58ddfb7c8721&auto=format&fit=crop&w=2250&q=80"
-        }
-      />
-      <InfoBox>
-        <InfoItem item={"Americano"} />
-        <InfoItem item={"Seoul / S. Korea"} />
-        <InfoItem item={"Flynn"} />
-      </InfoBox>
-    </View>
+    {loading && "Loading..."}
+    {!loading &&
+      !error &&
+      !GetDeskPic.error && (
+        <View>
+          <Image src={GetDeskPic.deskPic.photoUrl} />
+          <InfoBox>
+            <InfoItem item={GetDeskPic.deskPic.drink.name} />
+            <InfoItem item={GetDeskPic.deskPic.locationName} />
+            <InfoItem item={GetDeskPic.deskPic.user.firstName} />
+          </InfoBox>
+        </View>
+      )}
   </Page>
 );
+
+ViewPresenter.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  data: PropTypes.object,
+  error: PropTypes.object
+};
 
 export default ViewPresenter;
