@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Image from "../../Components/Image";
 
 const Container = styled.div`
   padding-top: 100px;
@@ -21,50 +22,18 @@ const Images = styled.div`
   overflow: hidden;
 `;
 
-const Card = styled.div`
-  background-color: white;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  padding: 10px;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 0;
-  font-style: italic;
-`;
-
-const Image = styled.div`
-  background: url("https://images.unsplash.com/photo-1529867094037-62cb612ab829?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fd4d638283a0871756df58ddfb7c8721&auto=format&fit=crop&w=2250&q=80");
-  padding-bottom: 100%;
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-  &:hover ${Card} {
-    opacity: 1;
-  }
-`;
-
-const Item = styled.span`
-  display: block;
-  margin-bottom: 10px;
-`;
-
 const HomePresenter = () => (
   <Container>
     <Title>deks pics</Title>
     <Images>
-      <Image>
-        <Card>
-          <Item>Capuccino</Item>
-          <Item>Seoul/Korea</Item>
-          <Item>Flynn</Item>
-        </Card>
-      </Image>
-      <Image />
-      <Image />
-      <Image />
-      <Image />
-      <Image />
+      <Image
+        name={"Flynn"}
+        drink={"Americano"}
+        location={"Seoul/S. Korea"}
+        imageUrl={
+          "https://images.unsplash.com/photo-1529867094037-62cb612ab829?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fd4d638283a0871756df58ddfb7c8721&auto=format&fit=crop&w=2250&q=80"
+        }
+      />
     </Images>
   </Container>
 );

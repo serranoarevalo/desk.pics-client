@@ -1,14 +1,16 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Header from "../../Components/Header";
+import Add from "../../Routes/Add";
 import Home from "../../Routes/Home";
-import SubmitPlace from "../../Routes/SubmitPlace";
+import View from "../../Routes/View";
 
 const AppPresenter = () => (
   <React.Fragment>
     <Header />
     <Route exact={true} path={"/"} component={Home} />
-    <Route path={"/add"} component={SubmitPlace} />
+    <Route path={"/add"} component={Add} />
+    <Route path={"/view/:id"} component={View} />
   </React.Fragment>
 );
 
