@@ -13,7 +13,7 @@ const FBButton = Element.withComponent("button").extend`
 `;
 
 const FacebookLoginComponent = props => (
-  <FBButton onClick={props.onClick}>Log in with Facebbok</FBButton>
+  <FBButton onClick={props.onClick}>Log in with Facebook</FBButton>
 );
 
 const AddPresenter: React.SFC<IPresenterProps> = ({

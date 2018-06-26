@@ -38,18 +38,16 @@ const HomePresenter: React.SFC<IProps> = ({ loading, error, data }) => (
       {!loading &&
         !error &&
         data &&
-        data.GetDeskPics.deskPics
-          .map(pic => (
-            <Image
-              key={pic.id}
-              id={pic.id}
-              name={pic.user.firstName}
-              drink={pic.drink.name}
-              location={pic.locationName}
-              imageUrl={pic.photoUrl}
-            />
-          ))
-          .reverse()}
+        data.GetDeskPics.deskPics.map(pic => (
+          <Image
+            key={pic.id}
+            id={pic.id}
+            name={pic.user.firstName}
+            drink={pic.drink.name}
+            location={pic.locationName}
+            imageUrl={pic.photoUrl}
+          />
+        ))}
     </Images>
   </Container>
 );
