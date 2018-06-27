@@ -30,12 +30,13 @@ interface IProps {
   data: any;
 }
 
-const HomePresenter: React.SFC<IProps> = ({ loading, error, data }) => (
+const HomePresenter: React.SFC<IProps> = ({ loading, error, data = null }) => (
   <Container>
     <Title>desk pics</Title>
     <Images>
       {loading && "Loading..."}
-      {data &&
+      {!loading &&
+        data &&
         data.GetDeskPics.deskPics &&
         data.GetDeskPics.deskPics.map(pic => (
           <Image
