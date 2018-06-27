@@ -8,7 +8,6 @@ import React, {
 import { compose, graphql, MutationUpdaterFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
-import { GET_DESK_PICS } from "../Home/HomeQueries";
 import AddPresenter from "./AddPresenter";
 import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";
@@ -129,10 +128,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
 
 export default compose(
   graphql(UPLOAD_DESK_PIC, {
-    name: "UploadDeskPic",
-    options: {
-      refetchQueries: [{ query: GET_DESK_PICS, variables: { page: 0 } }]
-    }
+    name: "UploadDeskPic"
   }),
   graphql(CONNECT_USER, {
     name: "ConnectUser"

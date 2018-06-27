@@ -35,9 +35,8 @@ const HomePresenter: React.SFC<IProps> = ({ loading, error, data }) => (
     <Title>desk pics</Title>
     <Images>
       {loading && "Loading..."}
-      {!loading &&
-        !error &&
-        data &&
+      {data &&
+        data.GetDeskPics.deskPics &&
         data.GetDeskPics.deskPics.map(pic => (
           <Image
             key={pic.id}
