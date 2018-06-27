@@ -53,7 +53,7 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
       <React.Fragment>
         {loggedOutText}
         <FacebookLogin
-          appId="1718196768212364"
+          appId="396088857577648"
           autoLoad={true}
           fields="first_name,last_name,name,email,picture"
           callback={fbCallback}
