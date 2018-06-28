@@ -12,10 +12,10 @@ const Item = styled.span`
 `;
 
 interface IProps {
-  item: string;
+  item: string | null;
 }
 
-const InfoItem: React.SFC<IProps> = ({ item }) => <Item>{item}</Item>;
+const InfoItem: React.SFC<IProps> = ({ item = "" }) => <Item>{item}</Item>;
 
 InfoItem.propTypes = {
   item: PropTypes.string.isRequired

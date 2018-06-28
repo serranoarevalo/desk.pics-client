@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import Image from "../../Components/Image";
+import { GetDeskPicsResponse } from "../../types/graph";
 
 const Container = styled.div`
   padding-top: 100px;
@@ -27,7 +28,7 @@ const Images = styled.div`
 interface IProps {
   loading: boolean;
   error: ApolloError | undefined;
-  data: any;
+  data: GetDeskPicsResponse;
 }
 
 const HomePresenter: React.SFC<IProps> = ({ loading, error, data = null }) => (
@@ -37,8 +38,8 @@ const HomePresenter: React.SFC<IProps> = ({ loading, error, data = null }) => (
       {loading && "Loading..."}
       {!loading &&
         data &&
-        data.GetDeskPics.deskPics &&
-        data.GetDeskPics.deskPics.map(pic => (
+        data.deskPics &&
+        data.deskPics.map(pic => (
           <Image
             key={pic.id}
             id={pic.id}

@@ -19,7 +19,11 @@ class HomeContainer extends React.Component<{}, IState> {
     return (
       <Query query={GET_DESK_PICS} variables={{ page }}>
         {({ loading, error, data }) => (
-          <HomePresenter loading={loading} error={error} data={data} />
+          <HomePresenter
+            loading={loading}
+            error={error}
+            data={data.GetDeskPics}
+          />
         )}
       </Query>
     );

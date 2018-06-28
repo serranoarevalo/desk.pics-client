@@ -8,6 +8,10 @@ import React, {
 import { compose, graphql, MutationUpdaterFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
+import {
+  ConnectUserMutationArgs,
+  UploadDeskPicResponse
+} from "../../types/graph";
 import AddPresenter from "./AddPresenter";
 import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";
@@ -94,30 +98,33 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   };
 
   private handleFacebookResponse = async (response: any) => {
-    const { ConnectUser } = this.props;
-    const { email, first_name, last_name, userID } = response;
-    const { data }: any = await ConnectUser({
-      variables: {
+    if (response.status !== undefined) {
+      const { ConnectUser } = this.props;
+      const { email, first_name, last_name, userID } = response;
+      const connectUserVariables: ConnectUserMutationArgs = {
         email,
         firstName: first_name,
         lastName: last_name,
         fbUserId: userID
+      };
+      const { data }: any = await ConnectUser({
+        variables: connectUserVariables
+      });
+      if (data.ConnectUser.ok && data.ConnectUser.token) {
+        localStorage.setItem("jwt", data.ConnectUser.token);
+        this.setState({
+          screenState: "loggedIn"
+        });
+      } else if (!data.ok) {
+        this.setState({
+          loggedOutText: "Can't log in."
+        });
       }
-    });
-    if (data.ConnectUser.ok && data.ConnectUser.token) {
-      localStorage.setItem("jwt", data.ConnectUser.token);
-      this.setState({
-        screenState: "loggedIn"
-      });
-    } else if (!data.ok) {
-      this.setState({
-        loggedOutText: "Can't log in."
-      });
     }
   };
 
   private postUpload: MutationUpdaterFn = (cache, { data }: { data: any }) => {
-    const { UploadDeskPic } = data;
+    const { UploadDeskPic }: { UploadDeskPic: UploadDeskPicResponse } = data;
     if (UploadDeskPic.ok) {
       this.setState({
         screenState: "uploaded"

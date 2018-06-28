@@ -31,7 +31,7 @@ const Image = styled<ImageInterface, any>("div")`
 interface IProps {
   imageUrl: string;
   drink: string;
-  location: string;
+  location: string | null;
   name: string;
   id: number;
 }
@@ -40,7 +40,7 @@ const ImagePresenter: React.SFC<IProps> = ({
   id,
   drink,
   imageUrl,
-  location,
+  location = "",
   name
 }) => (
   <Link to={`/view/${id}`}>
@@ -57,7 +57,7 @@ const ImagePresenter: React.SFC<IProps> = ({
 ImagePresenter.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   drink: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.string,
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired
 };

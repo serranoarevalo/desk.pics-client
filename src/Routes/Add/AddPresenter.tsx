@@ -59,6 +59,8 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
           fields="first_name,last_name,name,email,picture"
           callback={fbCallback}
           render={FacebookLoginComponent}
+          isMobile={true}
+          disableMobileRedirect={true}
         />
       </React.Fragment>
     ) : (
