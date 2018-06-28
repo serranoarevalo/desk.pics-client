@@ -26,7 +26,9 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
   hasFile,
   screenState,
   fbCallback,
-  loggedOutText
+  loggedOutText,
+  notifyLogginIn,
+  loggingIn
 }) => (
   <Page>
     {screenState === "loggedIn" ? (
@@ -61,10 +63,13 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
           render={FacebookLoginComponent}
           isMobile={true}
           disableMobileRedirect={true}
+          onClick={notifyLogginIn}
+          isDisabled={loggingIn}
         />
+        {loggingIn && "Logging you in..."}
       </React.Fragment>
     ) : (
-      "Your desk pic was uploaded. Thanks."
+      "Your desk pic was uploaded. We will approve it soon. Thanks."
     )}
   </Page>
 );

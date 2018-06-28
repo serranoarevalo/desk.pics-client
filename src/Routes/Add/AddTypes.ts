@@ -14,10 +14,13 @@ export interface IContainerState extends IFormState {
   file?: Blob;
   screenState: screenState;
   loggedOutText: string;
+  loggingIn: boolean;
 }
 
 export interface IPresenterProps extends IContainerState {
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onFormSubmit: (event: FormEvent) => void;
   fbCallback: (response: any) => void;
+  loggingIn: boolean;
+  notifyLogginIn: () => void;
 }

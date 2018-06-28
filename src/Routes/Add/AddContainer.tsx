@@ -12,6 +12,7 @@ import {
   ConnectUserMutationArgs,
   UploadDeskPicResponse
 } from "../../types/graph";
+import { GET_DESK_PICS } from "../Home/HomeQueries";
 import AddPresenter from "./AddPresenter";
 import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";
@@ -31,7 +32,8 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       uploading: false,
       hasFile: false,
       screenState: "loggedOut",
-      loggedOutText: "First:\n"
+      loggedOutText: "First:\n",
+      loggingIn: false
     };
   }
   render() {
@@ -41,6 +43,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
         onInputChange={this.handleInputChage}
         onFormSubmit={this.handleFormSubmit}
         fbCallback={this.handleFacebookResponse}
+        notifyLogginIn={this.notifyLogginIn}
       />
     );
   }
@@ -129,11 +132,20 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       });
     }
   };
+
+  private notifyLogginIn = () => {
+    this.setState({
+      loggingIn: true
+    });
+  };
 }
 
 export default compose(
   graphql(UPLOAD_DESK_PIC, {
-    name: "UploadDeskPic"
+    name: "UploadDeskPic",
+    options: {
+      refetchQueries: [{ query: GET_DESK_PICS, variables: { page: 0 } }]
+    }
   }),
   graphql(CONNECT_USER, {
     name: "ConnectUser"
