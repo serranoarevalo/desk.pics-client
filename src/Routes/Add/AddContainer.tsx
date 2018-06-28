@@ -98,28 +98,26 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   };
 
   private handleFacebookResponse = async (response: any) => {
-    if (response.status !== undefined) {
-      const { ConnectUser } = this.props;
-      const { email, first_name, last_name, userID } = response;
-      const connectUserVariables: ConnectUserMutationArgs = {
-        email,
-        firstName: first_name,
-        lastName: last_name,
-        fbUserId: userID
-      };
-      const { data }: any = await ConnectUser({
-        variables: connectUserVariables
+    const { ConnectUser } = this.props;
+    const { email, first_name, last_name, userID } = response;
+    const connectUserVariables: ConnectUserMutationArgs = {
+      email,
+      firstName: first_name,
+      lastName: last_name,
+      fbUserId: userID
+    };
+    const { data }: any = await ConnectUser({
+      variables: connectUserVariables
+    });
+    if (data.ConnectUser.ok && data.ConnectUser.token) {
+      localStorage.setItem("jwt", data.ConnectUser.token);
+      this.setState({
+        screenState: "loggedIn"
       });
-      if (data.ConnectUser.ok && data.ConnectUser.token) {
-        localStorage.setItem("jwt", data.ConnectUser.token);
-        this.setState({
-          screenState: "loggedIn"
-        });
-      } else if (!data.ok) {
-        this.setState({
-          loggedOutText: "Can't log in."
-        });
-      }
+    } else if (!data.ok) {
+      this.setState({
+        loggedOutText: "Can't log in."
+      });
     }
   };
 
