@@ -5,6 +5,7 @@ import Page from "../../Components/Page";
 const Row = styled.span`
   display: block;
   margin-bottom: 10px;
+  line-height: 1.5;
 `;
 
 const Container = styled.div`
