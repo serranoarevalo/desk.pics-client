@@ -9,7 +9,11 @@ const Row = styled.span`
 `;
 
 const Container = styled.div`
-  width: 50%;
+  width: 100%;
+  max-width: 500px;
+  & a {
+    text-decoration: underline;
+  }
 `;
 
 const AboutPresenter: React.SFC = () => (
@@ -32,16 +36,12 @@ const AboutPresenter: React.SFC = () => (
       <br />
       <br />
       <Row>
-        노마드코더:{" "}
-        <a href={"http://academy.nomadcoders.co"}>
-          {"http://academy.nomadcoders.co"}
-        </a>
+        <a href={"http://academy.nomadcoders.co"}>노마드코더</a>
       </Row>
 
       <Row>
-        12개월 12개 사이드 프로젝트:{" "}
         <a href={"https://brunch.co.kr/magazine/sideproject12"}>
-          {"https://brunch.co.kr/magazine/sideproject12"}
+          12개월 12개 사이드 프로젝트
         </a>
       </Row>
     </Container>

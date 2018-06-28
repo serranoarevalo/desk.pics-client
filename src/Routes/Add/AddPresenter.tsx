@@ -10,6 +10,7 @@ import { IPresenterProps } from "./AddTypes";
 const FBButton = Element.withComponent("button").extend`
   margin-top:15px;
   cursor: pointer;
+  background:white;
 `;
 
 const FacebookLoginComponent = props => (
@@ -54,7 +55,7 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
         {loggedOutText}
         <FacebookLogin
           appId="396088857577648"
-          autoLoad={true}
+          autoLoad={false}
           fields="first_name,last_name,name,email,picture"
           callback={fbCallback}
           render={FacebookLoginComponent}
