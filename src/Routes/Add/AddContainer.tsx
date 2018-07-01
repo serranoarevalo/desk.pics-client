@@ -67,36 +67,38 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   private handleFormSubmit: FormEventHandler = async (event: FormEvent) => {
     const { UploadDeskPic } = this.props;
     event.preventDefault();
-    const { drinkName, locationName, file } = this.state;
-    if (locationName && drinkName && file) {
-      this.setState({
-        uploading: true
-      });
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("api_key", CLOUDINARY_KEY);
-      formData.append("timestamp", String(Date.now() / 1000));
-      formData.append("upload_preset", CLOUDINARY_PRESET);
-      const {
-        data: { secure_url }
-      } = await axios.post(
-        "https://api.cloudinary.com/v1_1/djjpx4ror/image/upload",
-        formData
-      );
-      this.setState({ photoUrl: secure_url });
-      UploadDeskPic({
-        variables: {
-          drinkName,
-          photoUrl: secure_url,
-          locationName
-        },
-        context: {
-          headers: {
-            "X-JWT": localStorage.getItem("jwt")
-          }
-        },
-        update: this.postUpload
-      });
+    const { drinkName, locationName, file, uploading } = this.state;
+    if (!uploading) {
+      if (locationName && drinkName && file) {
+        this.setState({
+          uploading: true
+        });
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("api_key", CLOUDINARY_KEY);
+        formData.append("timestamp", String(Date.now() / 1000));
+        formData.append("upload_preset", CLOUDINARY_PRESET);
+        const {
+          data: { secure_url }
+        } = await axios.post(
+          "https://api.cloudinary.com/v1_1/djjpx4ror/image/upload",
+          formData
+        );
+        this.setState({ photoUrl: secure_url });
+        UploadDeskPic({
+          variables: {
+            drinkName,
+            photoUrl: secure_url,
+            locationName
+          },
+          context: {
+            headers: {
+              "X-JWT": localStorage.getItem("jwt")
+            }
+          },
+          update: this.postUpload
+        });
+      }
     }
   };
 

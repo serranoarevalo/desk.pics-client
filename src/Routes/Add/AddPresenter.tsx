@@ -69,7 +69,7 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
         {loggingIn && "Logging you in..."}
       </React.Fragment>
     ) : (
-      "Your desk pic was uploaded. We will approve it soon. Thanks."
+      "Your desk pic was uploaded. Thanks."
     )}
   </Page>
 );
