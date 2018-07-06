@@ -5,6 +5,8 @@ export const GET_DESK_PICS = gql`
     GetDeskPics(page: $page) {
       ok
       error
+      pages
+      currentPage
       deskPics {
         id
         user {

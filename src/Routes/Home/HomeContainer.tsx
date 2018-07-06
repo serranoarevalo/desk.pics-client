@@ -4,7 +4,7 @@ import HomePresenter from "./HomePresenter";
 import { GET_DESK_PICS } from "./HomeQueries";
 
 interface IState {
-  page: 0;
+  page: number;
 }
 
 class HomeContainer extends React.Component<{}, IState> {
@@ -23,11 +23,29 @@ class HomeContainer extends React.Component<{}, IState> {
             loading={loading}
             error={error}
             data={data.GetDeskPics}
+            page={page}
+            onNextClick={this.onNextClick}
+            onPrevClick={this.onPrevClick}
           />
         )}
       </Query>
     );
   }
+  private onNextClick = (): void => {
+    this.setState(prevState => {
+      return {
+        page: prevState.page + 1
+      };
+    });
+  };
+
+  private onPrevClick = (): void => {
+    this.setState(prevState => {
+      return {
+        page: prevState.page - 1
+      };
+    });
+  };
 }
 
 export default HomeContainer;
