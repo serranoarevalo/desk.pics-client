@@ -10,10 +10,11 @@ const View = styled.div`
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-gap: 50px;
+  width: 100%;
 `;
 
 const Image = styled.img`
-  max-width: 100%;
+  max-width: 100vh;
 `;
 
 const InfoBox = styled.div`
