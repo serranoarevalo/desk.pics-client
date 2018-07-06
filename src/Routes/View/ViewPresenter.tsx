@@ -11,10 +11,13 @@ const View = styled.div`
   grid-template-columns: 3fr 1fr;
   grid-gap: 50px;
   width: 100%;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Image = styled.img`
-  max-width: 100vh;
+  max-width: 100%;
 `;
 
 const InfoBox = styled.div`
