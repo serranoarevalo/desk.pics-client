@@ -46,7 +46,7 @@ const HomePresenter: React.SFC<IProps> = ({ loading, error, data = null }) => (
             name={pic.user.firstName}
             drink={pic.drink.name}
             location={pic.locationName}
-            imageUrl={pic.photoUrl}
+            imageUrl={pic.officialUrl}
           />
         ))}
     </Images>

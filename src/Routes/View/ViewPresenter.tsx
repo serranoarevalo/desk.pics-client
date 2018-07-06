@@ -36,7 +36,7 @@ const ViewPresenter: React.SFC<IProps> = ({
       !error &&
       !GetDeskPic.error && (
         <View>
-          <Image src={GetDeskPic.deskPic.photoUrl} />
+          <Image src={GetDeskPic.deskPic.officialUrl} />
           <InfoBox>
             <InfoItem item={GetDeskPic.deskPic.drink.name} />
             <InfoItem item={GetDeskPic.deskPic.locationName} />
