@@ -17,7 +17,10 @@ const View = styled.div`
 `;
 
 const Image = styled.img`
-  max-width: 100%;
+  max-width: 100vh;
+  @media (max-width: 1300px) {
+    max-width: 90%;
+  }
 `;
 
 const InfoBox = styled.div`
