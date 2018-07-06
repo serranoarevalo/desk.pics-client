@@ -21,7 +21,11 @@ class ViewContainer extends React.Component<RouteComponentProps<IRouteProps>> {
     return (
       <Query query={GET_DESK_PIC} variables={{ id }}>
         {({ loading, data, error }) => (
-          <ViewPresenter data={data} loading={loading} error={error} />
+          <ViewPresenter
+            data={data.GetDeskPic}
+            loading={loading}
+            error={error}
+          />
         )}
       </Query>
     );
