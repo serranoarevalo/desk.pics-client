@@ -14,7 +14,7 @@ export const GET_DESK_PIC = gql`
           name
         }
         locationName
-        photoUrl
+        officialUrl
       }
     }
   }
