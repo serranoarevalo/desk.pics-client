@@ -5,17 +5,23 @@ import React, {
   FormEvent,
   FormEventHandler
 } from "react";
-import { compose, graphql, MutationUpdaterFn } from "react-apollo";
+import { compose, graphql, MutationFn, MutationUpdaterFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
+import {
+  ConnectUser,
+  ConnectUserVariables,
+  UploadDeskPic,
+  UploadDeskPicVariables
+} from "../../types/api";
 import { GET_DESK_PICS } from "../Home/HomeQueries";
 import AddPresenter from "./AddPresenter";
 import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";
 
 interface IProps extends RouteComponentProps<any> {
-  UploadDeskPic: any;
-  ConnectUser: any;
+  UploadDeskPic: MutationFn<UploadDeskPic, UploadDeskPicVariables>;
+  ConnectUser: MutationFn<ConnectUser, ConnectUserVariables>;
 }
 
 class AddContainer extends React.Component<IProps, IContainerState> {
@@ -61,7 +67,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   };
 
   private handleFormSubmit: FormEventHandler = async (event: FormEvent) => {
-    const { UploadDeskPic } = this.props;
+    const { UploadDeskPic: UploadDeskPicMutation } = this.props;
     event.preventDefault();
     const { drinkName, locationName, file, uploading } = this.state;
     if (!uploading) {
@@ -81,16 +87,11 @@ class AddContainer extends React.Component<IProps, IContainerState> {
           formData
         );
         this.setState({ photoUrl: secure_url });
-        UploadDeskPic({
+        UploadDeskPicMutation({
           variables: {
             drinkName,
             photoUrl: secure_url,
             locationName
-          },
-          context: {
-            headers: {
-              "X-JWT": localStorage.getItem("jwt")
-            }
           },
           update: this.postUpload
         });
@@ -99,7 +100,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   };
 
   private handleFacebookResponse = async (response: any) => {
-    const { ConnectUser } = this.props;
+    const { ConnectUser: ConnectUserMutation } = this.props;
     const { email, first_name, last_name, userID } = response;
     const connectUserVariables = {
       email,
@@ -107,7 +108,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
       lastName: last_name,
       fbUserId: userID
     };
-    const { data }: any = await ConnectUser({
+    const { data }: any = await ConnectUserMutation({
       variables: connectUserVariables
     });
     if (data.ConnectUser.ok && data.ConnectUser.token) {
@@ -123,8 +124,8 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   };
 
   private postUpload: MutationUpdaterFn = (cache, { data }: { data: any }) => {
-    const { UploadDeskPic }: { UploadDeskPic } = data;
-    if (UploadDeskPic.ok) {
+    const { UploadDeskPic: UploadDeskPicMutation } = data;
+    if (UploadDeskPicMutation.ok) {
       this.setState({
         screenState: "uploaded"
       });
@@ -139,13 +140,18 @@ class AddContainer extends React.Component<IProps, IContainerState> {
 }
 
 export default compose(
-  graphql(UPLOAD_DESK_PIC, {
+  graphql<UploadDeskPic, UploadDeskPicVariables, IProps>(UPLOAD_DESK_PIC, {
     name: "UploadDeskPic",
     options: {
-      refetchQueries: [{ query: GET_DESK_PICS, variables: { page: 0 } }]
+      refetchQueries: [{ query: GET_DESK_PICS, variables: { page: 0 } }],
+      context: {
+        headers: {
+          "X-JWT": localStorage.getItem("jwt") || ""
+        }
+      }
     }
   }),
-  graphql(CONNECT_USER, {
+  graphql<ConnectUser, ConnectUserVariables, IProps>(CONNECT_USER, {
     name: "ConnectUser"
   })
 )(AddContainer);
