@@ -8,10 +8,6 @@ import React, {
 import { compose, graphql, MutationUpdaterFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
-import {
-  ConnectUserMutationArgs,
-  UploadDeskPicResponse
-} from "../../types/graph";
 import { GET_DESK_PICS } from "../Home/HomeQueries";
 import AddPresenter from "./AddPresenter";
 import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
@@ -105,7 +101,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   private handleFacebookResponse = async (response: any) => {
     const { ConnectUser } = this.props;
     const { email, first_name, last_name, userID } = response;
-    const connectUserVariables: ConnectUserMutationArgs = {
+    const connectUserVariables = {
       email,
       firstName: first_name,
       lastName: last_name,
@@ -127,7 +123,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
   };
 
   private postUpload: MutationUpdaterFn = (cache, { data }: { data: any }) => {
-    const { UploadDeskPic }: { UploadDeskPic: UploadDeskPicResponse } = data;
+    const { UploadDeskPic }: { UploadDeskPic } = data;
     if (UploadDeskPic.ok) {
       this.setState({
         screenState: "uploaded"

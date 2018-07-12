@@ -1,11 +1,14 @@
 import React from "react";
 import { Query } from "react-apollo";
+import { GetDeskPics, GetDeskPicsVariables } from "../../types/api";
 import HomePresenter from "./HomePresenter";
 import { GET_DESK_PICS } from "./HomeQueries";
 
 interface IState {
   page: number;
 }
+
+class HomeQuery extends Query<GetDeskPics, GetDeskPicsVariables> {}
 
 class HomeContainer extends React.Component<{}, IState> {
   constructor(props: {}) {
@@ -17,18 +20,18 @@ class HomeContainer extends React.Component<{}, IState> {
   render() {
     const { page } = this.state;
     return (
-      <Query query={GET_DESK_PICS} variables={{ page }}>
+      <HomeQuery query={GET_DESK_PICS} variables={{ page }}>
         {({ loading, error, data }) => (
           <HomePresenter
             loading={loading}
             error={error}
-            data={data.GetDeskPics}
+            data={data}
             page={page}
             onNextClick={this.onNextClick}
             onPrevClick={this.onPrevClick}
           />
         )}
-      </Query>
+      </HomeQuery>
     );
   }
   private onNextClick = (): void => {

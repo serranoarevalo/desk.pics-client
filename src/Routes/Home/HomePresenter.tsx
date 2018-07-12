@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import Image from "../../Components/Image";
-import { GetDeskPicsResponse } from "../../types/graph";
+import { GetDeskPics } from "../../types/api";
 
 const Container = styled.div`
   padding-top: 100px;
@@ -45,7 +45,7 @@ const Arrow = styled.span`
 interface IProps {
   loading: boolean;
   error: ApolloError | undefined;
-  data: GetDeskPicsResponse;
+  data: GetDeskPics | undefined;
   page: number;
   onNextClick: () => void;
   onPrevClick: () => void;
@@ -65,26 +65,31 @@ const HomePresenter: React.SFC<IProps> = ({
       {loading && "Loading..."}
       {!loading &&
         data &&
-        data.deskPics &&
-        data.deskPics.map(pic => (
-          <Image
-            key={pic.id}
-            id={pic.id}
-            name={pic.user.firstName}
-            drink={pic.drink.name}
-            location={pic.locationName}
-            imageUrl={pic.thumbnailUrl}
-          />
-        ))}
+        data.GetDeskPics.deskPics &&
+        data.GetDeskPics.deskPics.map(
+          pic =>
+            pic && (
+              <Image
+                key={pic.id}
+                id={pic.id}
+                name={pic.user.firstName}
+                drink={pic.drink.name}
+                location={pic.locationName}
+                imageUrl={pic.thumbnailUrl}
+              />
+            )
+        )}
     </Images>
     {!loading &&
       data && (
         <Pagination>
           <Arrow onClick={onPrevClick}>{page > 0 && "←"}</Arrow>
           <Pages>
-            {data.currentPage}/{data.pages}
+            {data.GetDeskPics.currentPage}/{data.GetDeskPics.pages}
           </Pages>
-          <Arrow onClick={onNextClick}>{page < data.pages && `→`}</Arrow>
+          <Arrow onClick={onNextClick}>
+            {page < data.GetDeskPics.pages && `→`}
+          </Arrow>
         </Pagination>
       )}
   </Container>
