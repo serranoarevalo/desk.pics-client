@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import InfoItem from "../../Components/InfoItem";
 import Page from "../../Components/Page";
-import { GetDeskPicResponse } from "../../types/graph";
+import { GetDeskPic } from "../../types/api";
 
 const View = styled.div`
   display: grid;
@@ -28,7 +28,7 @@ const InfoBox = styled.div`
 `;
 
 interface IProps {
-  data: GetDeskPicResponse;
+  data: GetDeskPic | undefined;
   loading: boolean;
   error: ApolloError | undefined;
 }
@@ -37,17 +37,21 @@ const ViewPresenter: React.SFC<IProps> = ({ data, loading, error }) => (
   <Page>
     {loading ? (
       "Loading..."
-    ) : data.deskPic && !data.error ? (
+    ) : data && data.GetDeskPic.deskPic && !data.GetDeskPic.error ? (
       <View>
-        <Image src={data.deskPic.bigUrl} />
+        <Image src={data.GetDeskPic.deskPic.bigUrl} />
         <InfoBox>
-          <InfoItem item={data.deskPic.drink.name} />
-          <InfoItem item={data.deskPic.locationName} />
-          <InfoItem item={data.deskPic.user.firstName} />
+          <InfoItem item={data.GetDeskPic.deskPic.drink.name} />
+          <InfoItem item={data.GetDeskPic.deskPic.locationName} />
+          <InfoItem item={data.GetDeskPic.deskPic.user.firstName} />
         </InfoBox>
       </View>
     ) : (
-      !loading && !error && data.error && data.error
+      !loading &&
+      !error &&
+      data &&
+      data.GetDeskPic.error &&
+      data.GetDeskPic.error
     )}
   </Page>
 );
