@@ -140,7 +140,7 @@ class AddContainer extends React.Component<IProps, IContainerState> {
 }
 
 export default compose(
-  graphql<UploadDeskPic, UploadDeskPicVariables, IProps>(UPLOAD_DESK_PIC, {
+  graphql<UploadDeskPic, UploadDeskPicVariables>(UPLOAD_DESK_PIC, {
     name: "UploadDeskPic",
     options: {
       refetchQueries: [{ query: GET_DESK_PICS, variables: { page: 0 } }],
@@ -151,7 +151,7 @@ export default compose(
       }
     }
   }),
-  graphql<ConnectUser, ConnectUserVariables, IProps>(CONNECT_USER, {
+  graphql<ConnectUser, ConnectUserVariables>(CONNECT_USER, {
     name: "ConnectUser"
   })
 )(AddContainer);

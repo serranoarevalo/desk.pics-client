@@ -25,8 +25,7 @@
     "deploy": "gh-pages -d build",
     "predeploy": "yarn run build",
     "precodegen": "apollo schema:download",
-    "codegen": "apollo codegen:generate src/types/api.d.ts --queries='src/**/*.ts' --addTypename  --schema schema.json --target typescript  --outputFlat",
-    "prestart": "yarn run codegen"
+    "codegen": "apollo codegen:generate src/types/api.d.ts --queries='src/**/*.ts' --addTypename  --schema schema.json --target typescript  --outputFlat"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

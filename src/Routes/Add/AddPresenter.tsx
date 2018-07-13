@@ -71,6 +71,19 @@ const AddPresenter: React.SFC<IPresenterProps> = ({
     ) : (
       "Your desk pic was uploaded. Thanks."
     )}
+    {screenState === "loggedOut" && (
+      <React.Fragment>
+        You can also go to our{" "}
+        <a
+          href="https://nomadcoders.now.sh"
+          style={{ textDecoration: "underline" }}
+        >
+          slack channel
+        </a>{" "}
+        and send the photo to @deskpics with the comment{" "}
+        {`[<Drink>|<Location>]`}
+      </React.Fragment>
+    )}
   </Page>
 );
 

@@ -1,3 +1,3 @@
-import AboutPresenter from "./AboutPresenter";
+import AboutContainer from "./AboutContainer";
 
-export default AboutPresenter;
+export default AboutContainer;
