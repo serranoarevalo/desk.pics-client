@@ -15,6 +15,7 @@ export const GET_DESK_PIC = gql`
         }
         locationName
         bigUrl
+        views
       }
     }
   }

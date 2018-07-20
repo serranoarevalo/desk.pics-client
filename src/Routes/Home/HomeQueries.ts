@@ -17,6 +17,7 @@ export const GET_DESK_PICS = gql`
         }
         locationName
         thumbnailUrl
+        views
       }
     }
   }

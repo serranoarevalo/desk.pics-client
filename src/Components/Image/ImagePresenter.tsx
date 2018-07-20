@@ -34,6 +34,7 @@ interface IProps {
   location: string | null;
   name: string;
   id: number;
+  views: number;
 }
 
 const ImagePresenter: React.SFC<IProps> = ({
@@ -41,7 +42,8 @@ const ImagePresenter: React.SFC<IProps> = ({
   drink,
   imageUrl,
   location = "",
-  name
+  name,
+  views
 }) => (
   <Link to={`/view/${id}`}>
     <Image imageUrl={imageUrl}>
@@ -49,6 +51,7 @@ const ImagePresenter: React.SFC<IProps> = ({
         <InfoItem item={drink} />
         <InfoItem item={location} />
         <InfoItem item={name} />
+        <InfoItem item={views === 1 ? `1 view` : `${views} views`} />
       </Card>
     </Image>
   </Link>

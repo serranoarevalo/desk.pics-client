@@ -76,6 +76,7 @@ const HomePresenter: React.SFC<IProps> = ({
                 drink={pic.drink.name}
                 location={pic.locationName}
                 imageUrl={pic.thumbnailUrl}
+                views={pic.views}
               />
             )
         )}

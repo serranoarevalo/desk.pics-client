@@ -41,9 +41,14 @@ const ViewPresenter: React.SFC<IProps> = ({ data, loading, error }) => (
       <View>
         <Image src={data.GetDeskPic.deskPic.bigUrl} />
         <InfoBox>
-          <InfoItem item={data.GetDeskPic.deskPic.drink.name} />
-          <InfoItem item={data.GetDeskPic.deskPic.locationName} />
-          <InfoItem item={data.GetDeskPic.deskPic.user.firstName} />
+          <InfoItem item={`Drink: ${data.GetDeskPic.deskPic.drink.name}.`} />
+          <InfoItem
+            item={`Location: ${data.GetDeskPic.deskPic.locationName}.`}
+          />
+          <InfoItem
+            item={`Author: ${data.GetDeskPic.deskPic.user.firstName}.`}
+          />
+          <InfoItem item={`Views: ${data.GetDeskPic.deskPic.views}`} />
         </InfoBox>
       </View>
     ) : (

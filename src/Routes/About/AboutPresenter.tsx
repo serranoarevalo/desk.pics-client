@@ -53,7 +53,7 @@ const AboutPresenter: React.SFC<IProps> = ({ lang, onSwitchClick }) => (
           <br />
           <br />
           <Row>
-            <a href={"http://academy.nomadcoders.co"}>노마드코더</a>
+            <a href={"http://nomadcoders.co"}>노마드코더</a>
           </Row>
 
           <Row>
