@@ -48,7 +48,6 @@ const ViewPresenter: React.SFC<IProps> = ({ data, loading, error }) => (
           <InfoItem
             item={`Author: ${data.GetDeskPic.deskPic.user.firstName}.`}
           />
-          <InfoItem item={`Views: ${data.GetDeskPic.deskPic.views}`} />
         </InfoBox>
       </View>
     ) : (

@@ -51,7 +51,6 @@ const ImagePresenter: React.SFC<IProps> = ({
         <InfoItem item={drink} />
         <InfoItem item={location} />
         <InfoItem item={name} />
-        <InfoItem item={views === 1 ? `1 view` : `${views} views`} />
       </Card>
     </Image>
   </Link>
