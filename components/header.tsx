@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -16,10 +16,13 @@ const SLink = styled(Link)`
   font-size: 14px;
 `;
 
-const HeaderPresenter = () => (
+export default () => (
   <Container>
-    <SLink to={"/about"}>about</SLink> <SLink to={"/add"}>add photo</SLink>
+    <SLink href={"/about"}>
+      <a>about</a>
+    </SLink>
+    <SLink href={"/add"}>
+      <a>add photo</a>
+    </SLink>
   </Container>
 );
-
-export default HeaderPresenter;

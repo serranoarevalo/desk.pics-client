@@ -3,7 +3,6 @@ import reset from "styled-reset";
 
 injectGlobal`
 ${reset};
-
 *{
     box-sizing:border-box;
 }

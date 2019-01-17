@@ -1,32 +1,20 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "build/dist",
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es6", "dom", "esnext.asynciterable"],
-    "sourceMap": true,
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
     "allowJs": true,
-    "jsx": "react",
     "moduleResolution": "node",
-    "rootDir": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": false,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  },
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
-  ]
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["dom", "es2015", "es2016"]
+  }
 }
