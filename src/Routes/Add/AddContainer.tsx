@@ -7,14 +7,14 @@ import React, {
 } from "react";
 import { compose, graphql, MutationFn, MutationUpdaterFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
-import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../keys";
+import { CLOUDINARY_KEY, CLOUDINARY_PRESET } from "../../../keys";
 import {
   ConnectUser,
   ConnectUserVariables,
   UploadDeskPic,
   UploadDeskPicVariables
-} from "../../types/api";
-import { GET_DESK_PICS } from "../Home/HomeQueries";
+} from "../../../types/api";
+import { GET_DESK_PICS } from "../../pages/index/HomeQueries";
 import AddPresenter from "./AddPresenter";
 import { CONNECT_USER, UPLOAD_DESK_PIC } from "./AddQueries";
 import { IContainerState } from "./AddTypes";

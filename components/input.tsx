@@ -30,7 +30,7 @@ interface IProps {
   required: boolean;
 }
 
-const TextInputPresenter: React.SFC<IProps> = ({
+const Input: React.SFC<IProps> = ({
   value,
   onChange,
   placeholder,
@@ -48,7 +48,7 @@ const TextInputPresenter: React.SFC<IProps> = ({
   />
 );
 
-TextInputPresenter.propTypes = {
+Input.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
@@ -57,4 +57,4 @@ TextInputPresenter.propTypes = {
   required: PropTypes.bool.isRequired
 };
 
-export default TextInputPresenter;
+export default Input;

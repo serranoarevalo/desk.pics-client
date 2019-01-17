@@ -33,7 +33,7 @@ const Input = styled.input`
   }
 `;
 
-const FileInputPresenter = ({ onChange, hasFile }) => (
+const FileInput = ({ onChange, hasFile }) => (
   <Container hasFile={hasFile}>
     <Label htmlFor={"file"}>
       {hasFile ? "Photo Selected ✓" : "Select Photo"}
@@ -48,4 +48,4 @@ const FileInputPresenter = ({ onChange, hasFile }) => (
   </Container>
 );
 
-export default FileInputPresenter;
+export default FileInput;

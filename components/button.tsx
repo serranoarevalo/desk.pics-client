@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import { Element } from "../Input";
+import { Element } from "./input";
 
 export const ButtonElement = styled(Element)`
   background-color: transparent;
@@ -15,12 +15,12 @@ interface IProps {
   value: string;
 }
 
-const ButtonPresenter: React.SFC<IProps> = ({ value }) => (
+const Button: React.SFC<IProps> = ({ value }) => (
   <ButtonElement type="submit" value={value} />
 );
 
-ButtonPresenter.propTypes = {
+Button.propTypes = {
   value: PropTypes.string.isRequired
 };
 
-export default ButtonPresenter;
+export default Button;

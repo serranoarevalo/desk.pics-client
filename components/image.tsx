@@ -43,8 +43,7 @@ const Image: React.SFC<IProps> = ({
   drink,
   imageUrl,
   location = "",
-  name,
-  views
+  name
 }) => (
   <Link href={`/view/${id}`}>
     <SImage imageUrl={imageUrl}>

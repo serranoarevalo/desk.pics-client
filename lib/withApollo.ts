@@ -1,10 +1,9 @@
 import withApollo from "next-with-apollo";
-import ApolloClient, { InMemoryCache } from "apollo-boost";
+import ApolloClient from "apollo-boost";
 
 export default withApollo(
-  ({ ctx, headers, initialState }) =>
+  ({ initialState }) =>
     new ApolloClient({
-      uri: "https://deskpics.now.sh/graphql",
-      cache: new InMemoryCache().restore(initialState || {})
+      uri: "https://deskpics.now.sh/graphql"
     })
 );
