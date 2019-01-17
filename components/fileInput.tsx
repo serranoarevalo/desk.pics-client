@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-interface IContainer {
-  hasFile: boolean;
-}
-
-const Container = styled<IContainer, any>("div")`
+const Container = styled.div`
   color: ${props => (props.hasFile ? "black" : "rgba(0, 0, 0, 0.5);")};
   min-width: 40%;
   cursor: pointer;

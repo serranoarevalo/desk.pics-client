@@ -13,11 +13,7 @@ const Card = styled.div`
   opacity: 0;
 `;
 
-interface ImageInterface {
-  imageUrl: string;
-}
-
-const SImage = styled<ImageInterface, any>("div")`
+const SImage = styled.div`
   background: url(${props => props.imageUrl});
   padding-bottom: 100%;
   background-size: cover;
@@ -45,14 +41,16 @@ const Image: React.SFC<IProps> = ({
   location = "",
   name
 }) => (
-  <Link href={`/view/${id}`}>
-    <SImage imageUrl={imageUrl}>
-      <Card>
-        <InfoItem item={drink} />
-        <InfoItem item={location} />
-        <InfoItem item={name} />
-      </Card>
-    </SImage>
+  <Link href={`/view?desk=${id}`}>
+    <a>
+      <SImage imageUrl={imageUrl}>
+        <Card>
+          <InfoItem item={drink} />
+          <InfoItem item={location} />
+          <InfoItem item={name} />
+        </Card>
+      </SImage>
+    </a>
   </Link>
 );
 

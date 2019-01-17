@@ -11,22 +11,18 @@ const Container = styled.div`
   z-index: 10;
 `;
 
-const SLink = styled.span`
+const SLink = styled.a`
   margin-right: 15px;
   font-size: 14px;
 `;
 
 export default () => (
   <Container>
-    <SLink>
-      <Link href={"/about"}>
-        <a>about</a>
-      </Link>
-    </SLink>
-    <SLink>
-      <Link href={"/add"}>
-        <a>add photo</a>
-      </Link>
-    </SLink>
+    <Link href={"/about"}>
+      <SLink>about</SLink>
+    </Link>
+    <Link href={"/add"}>
+      <SLink>add photo</SLink>
+    </Link>
   </Container>
 );
