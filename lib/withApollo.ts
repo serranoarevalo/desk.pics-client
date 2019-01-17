@@ -1,16 +1,10 @@
 import withApollo from "next-with-apollo";
-import ApolloClient from "apollo-boost";
-
-let uri = "";
-if (process.env.NODE_ENV === "development") {
-  uri = "http://localhost:4000/graphql";
-} else {
-  uri = "https://deskpics.now.sh/graphql";
-}
+import ApolloClient, { InMemoryCache } from "apollo-boost";
 
 export default withApollo(
-  () =>
+  ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      uri
+      uri: "https://deskpics.now.sh/graphql",
+      cache: new InMemoryCache().restore(initialState || {})
     })
 );

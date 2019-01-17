@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -7,19 +7,20 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const SLink = styled(Link)`
+const SLink = styled.span`
   font-size: 36px;
+  cursor: pointer;
 `;
 
 const Children = styled.div`
   margin-top: 80px;
 `;
 
-const PagePresenter: React.SFC = ({ children }) => (
+export default ({ children }) => (
   <Container>
-    <SLink to={"/"}>←</SLink>
+    <Link href={"/"}>
+      <SLink>←</SLink>
+    </Link>
     <Children>{children}</Children>
   </Container>
 );
-
-export default PagePresenter;

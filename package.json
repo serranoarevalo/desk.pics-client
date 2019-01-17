@@ -17,21 +17,21 @@
   },
   "scripts": {
     "dev": "next",
+    "start": "next start",
     "build": "next build",
     "precodegen": "apollo schema:download",
     "codegen": "apollo codegen:generate types/api.d.ts --queries='**/*.ts' --addTypename  --schema schema.json --target typescript  --outputFlat"
   },
   "devDependencies": {
-    "@types/prop-types": "^15.5.3",
     "@types/axios": "^0.14.0",
     "@types/graphql": "^0.13.1",
     "@types/jest": "^23.1.1",
     "@types/next": "^7.0.6",
     "@types/node": "^10.3.4",
+    "@types/prop-types": "^15.5.3",
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
     "@types/react-router-dom": "^4.2.7",
-    "gh-pages": "^1.2.0",
     "typescript": "^2.9.2"
   },
   "homepage": "https://deskpics.nomadcoders.co"

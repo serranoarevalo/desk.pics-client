@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import styled from "styled-components";
-import InfoItem from "../InfoItem";
+import InfoItem from "./infoItem";
 
 const Card = styled.div`
   background-color: white;
@@ -17,12 +17,13 @@ interface ImageInterface {
   imageUrl: string;
 }
 
-const Image = styled<ImageInterface, any>("div")`
+const SImage = styled<ImageInterface, any>("div")`
   background: url(${props => props.imageUrl});
   padding-bottom: 100%;
   background-size: cover;
   background-position: center center;
   position: relative;
+  cursor: pointer;
   &:hover ${Card} {
     opacity: 1;
   }
@@ -37,7 +38,7 @@ interface IProps {
   views: number;
 }
 
-const ImagePresenter: React.SFC<IProps> = ({
+const Image: React.SFC<IProps> = ({
   id,
   drink,
   imageUrl,
@@ -45,18 +46,18 @@ const ImagePresenter: React.SFC<IProps> = ({
   name,
   views
 }) => (
-  <Link to={`/view/${id}`}>
-    <Image imageUrl={imageUrl}>
+  <Link href={`/view/${id}`}>
+    <SImage imageUrl={imageUrl}>
       <Card>
         <InfoItem item={drink} />
         <InfoItem item={location} />
         <InfoItem item={name} />
       </Card>
-    </Image>
+    </SImage>
   </Link>
 );
 
-ImagePresenter.propTypes = {
+Image.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   drink: PropTypes.string.isRequired,
   location: PropTypes.string,
@@ -64,4 +65,4 @@ ImagePresenter.propTypes = {
   id: PropTypes.number.isRequired
 };
 
-export default ImagePresenter;
+export default Image;

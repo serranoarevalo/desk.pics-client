@@ -2,7 +2,7 @@ import { ApolloError } from "apollo-boost";
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import Image from "../../Components/Image";
+import Image from "../../components/image";
 import { GetDeskPics } from "../../types/api";
 
 const Container = styled.div`
@@ -53,7 +53,6 @@ interface IProps {
 
 const HomePresenter: React.SFC<IProps> = ({
   loading = true,
-  error,
   data = null,
   page = 0,
   onNextClick,
